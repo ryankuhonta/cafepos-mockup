@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CafePOS — UI Mockup</title>
+<style>
+  :root {
+    --red: #c8102e;
+    --red-dark: #8e0b20;
+    --ink: #1c1c1e;
+    --muted: #5f6368;
+    --line: #e6e2da;
+    --cream: #fff8e7;
+    --soft: #faf7f1;
+    --bg: #efeae0;
+    --green: #1f6f43;
+    --green-soft: #eef7f1;
+    --amber: #8a6d1f;
+    --amber-soft: #fdf8ea;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page-head {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 36px 24px 10px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--red);
+  }
+  .page-head h1 {
+    margin: 6px 0 4px;
+    font-size: 34px;
+    letter-spacing: -0.6px;
+  }
+  .page-head p {
+    margin: 0;
+    max-width: 720px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .screen-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    background: rgba(239, 234, 224, 0.94);
+    backdrop-filter: blur(10px);
+  }
+  .tab {
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid #d8d2c6;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .tab:hover { border-color: var(--red); color: var(--red-dark); }
+  .tab.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+  .screen-panel {
+    display: none;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px 56px;
+  }
+  .screen-panel.active { display: block; }
+
+  .panel-caption {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: 1280px;
+    margin: 0 auto 10px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  .panel-caption strong { color: var(--ink); font-size: 15px; }
+
+  .frame-wrap { overflow-x: auto; padding-bottom: 4px; }
+  .frame {
+    width: 1280px;
+    height: 800px;
+    margin: 0 auto;
+    border-radius: 26px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 28px 70px rgba(28, 28, 30, 0.2), 0 2px 0 rgba(255, 255, 255, 0.8) inset;
+  }
+
+  /* ---------- app shell ---------- */
+  .app { display: flex; height: 100%; background: #fff; }
+
+  .rail {
+    width: 92px;
+    flex: 0 0 92px;
+    background: var(--ink);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 8px;
+  }
+  .brand {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    background: var(--red);
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+  .rail button {
+    width: 76px;
+    height: 66px;
+    border: 0;
+    border-radius: 14px;
+    background: transparent;
+    color: #b9b3a8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .rail button svg { width: 20px; height: 20px; }
+  .rail button.active { background: var(--red); color: #fff; }
+  .rail .spacer { flex: 1; }
+
+  .workspace { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+  .topbar {
+    height: 70px;
+    flex: 0 0 70px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--line);
+    background: #fff;
+  }
+  .store-name { font-size: 19px; font-weight: 800; letter-spacing: -0.3px; }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .badge.green { background: var(--green-soft); color: var(--green); }
+  .badge.amber { background: var(--amber-soft); color: var(--amber); }
+  .badge.grey { background: #f1eee7; color: var(--muted); }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .topbar .spacer { flex: 1; }
+  .user-chip {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 5px 10px 5px 5px;
+    border-radius: 999px;
+    background: #f6f3ec;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  /* ---------- POS ---------- */
+  .pos-body { display: grid; grid-template-columns: 1fr 372px; height: calc(100% - 70px); }
+  .menu-area { padding: 18px 20px; min-width: 0; overflow: hidden; }
+  .category-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .category-tabs button {
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .category-tabs button.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+  .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .menu-card {
+    min-height: 126px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: #fff;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+  }
+  .menu-card:hover { border-color: var(--red); box-shadow: 0 8px 20px rgba(200, 16, 46, 0.09); }
+  .cup {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--cream);
+    color: var(--red-dark);
+    display: grid;
+    place-items: center;
+  }
+  .menu-card .name { display: block; font-size: 16px; font-weight: 800; margin-top: 10px; }
+  .menu-card .price { display: block; font-size: 15px; color: var(--muted); margin-top: 2px; }
+  .menu-card .add {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    color: var(--red);
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .cart {
+    border-left: 1px solid var(--line);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .cart-head {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cart-head h2 { margin: 0; font-size: 18px; }
+  .order-type {
+    display: inline-flex;
+    padding: 3px;
+    border-radius: 999px;
+    background: #f1eee7;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .order-type span { padding: 5px 10px; border-radius: 999px; color: var(--muted); }
+  .order-type span.active { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+
+  .cart-lines { flex: 1; overflow-y: auto; padding: 8px 20px 0; }
+  .cart-line { padding: 14px 0; border-bottom: 1px dashed var(--line); }
+  .line-top { display: flex; justify-content: space-between; gap: 10px; font-size: 15px; font-weight: 800; }
+  .line-sub { margin-top: 2px; font-size: 12px; color: var(--muted); }
+  .qty { display: flex; align-items: center; gap: 8px; margin-top: 9px; }
+  .qty button {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .qty button:hover { border-color: var(--red); color: var(--red); }
+  .qty .count { min-width: 20px; text-align: center; font-weight: 800; }
+  .qty .remove { margin-left: auto; width: 34px; height: 34px; border: 0; border-radius: 9px; background: transparent; color: var(--red); font-size: 20px; font-weight: 800; line-height: 1; cursor: pointer; }
+  .qty .remove:hover { background: #fdecef; }
+
+  .cart-summary { padding: 14px 20px 18px; border-top: 1px solid var(--line); background: var(--soft); }
+  .sum-row { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 6px; color: var(--muted); }
+  .sum-row.discount { color: var(--green); }
+  .sum-row.total { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); color: var(--ink); font-size: 22px; font-weight: 900; }
+  .charge {
+    width: 100%;
+    height: 58px;
+    margin-top: 12px;
+    border: 0;
+    border-radius: 14px;
+    background: var(--red);
+    color: #fff;
+    font: inherit;
+    font-size: 17px;
+    font-weight: 900;
+    cursor: pointer;
+  }
+  .charge:hover { background: var(--red-dark); }
+
+  .silent-note { margin-top: 18px; font-size: 12px; color: var(--muted); }
+
+  /* ---------- modal ---------- */
+  .payment-stage {
+    position: relative;
+    height: 100%;
+    background: #f2eee6;
+    overflow: hidden;
+  }
+  .ghost {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 92px 1fr 372px;
+    opacity: 0.55;
+    filter: grayscale(0.15);
+  }
+  .ghost .g-rail { background: var(--ink); }
+  .ghost .g-main { padding: 22px; }
+  .ghost .g-topbar { display: flex; align-items: center; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #d9d3c8; }
+  .ghost .g-line { height: 14px; border-radius: 6px; background: #d9d3c8; margin-bottom: 12px; }
+  .ghost .g-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 26px; }
+  .ghost .g-card { height: 126px; border-radius: 16px; background: #e5dfd3; }
+  .ghost .g-cart { background: #e9e4d9; border-left: 1px solid #d9d3c8; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+  .ghost .g-charge { height: 56px; border-radius: 14px; background: var(--red); opacity: 0.35; }
+  .scrim { position: absolute; inset: 0; background: rgba(28, 28, 30, 0.2); }
+
+  .modal {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 440px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.3);
+    overflow: hidden;
+  }
+  .modal-head { padding: 20px 24px 16px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-start; }
+  .modal-head h2 { margin: 0; font-size: 22px; }
+  .modal-head p { margin: 3px 0 0; color: var(--muted); font-size: 13px; }
+  .modal-close { width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font-size: 18px; color: var(--muted); cursor: pointer; }
+  .modal-body { padding: 18px 24px 22px; }
+  .field-label { display: block; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 16px 0 8px; }
+  .methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .method { height: 50px; border: 1px solid var(--line); border-radius: 11px; background: #fff; font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+  .method:hover { border-color: var(--red); }
+  .method.active { background: var(--red); border-color: var(--red); color: #fff; }
+  .amount-box {
+    height: 64px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+  }
+  .amount-box span { color: var(--muted); font-size: 22px; margin-right: 4px; }
+  .quick { display: flex; gap: 8px; margin-top: 8px; }
+  .quick button { flex: 1; height: 40px; border: 1px solid var(--line); border-radius: 9px; background: #fff; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+  .quick button:hover { border-color: var(--red); color: var(--red); }
+  .change-box {
+    margin-top: 16px;
+    padding: 13px 15px;
+    border: 1px solid #cfe6d8;
+    border-radius: 12px;
+    background: var(--green-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--green);
+  }
+  .change-box strong { font-size: 24px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+  .btn-secondary { flex: 1; height: 50px; border: 1px solid var(--line); border-radius: 12px; background: #fff; font: inherit; font-weight: 800; cursor: pointer; }
+  .btn-primary { flex: 2; height: 50px; border: 0; border-radius: 12px; background: var(--red); color: #fff; font: inherit; font-weight: 900; cursor: pointer; }
+  .btn-primary:hover { background: var(--red-dark); }
+
+  /* ---------- slip ---------- */
+  .slip-stage {
+    height: 100%;
+    background: #f3efe6;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 48px;
+    align-items: center;
+    padding: 48px 64px;
+  }
+  .slip-info h2 { margin: 0 0 8px; font-size: 30px; letter-spacing: -0.5px; }
+  .slip-info p { margin: 0 0 16px; color: var(--muted); max-width: 480px; }
+  .printer-card { display: flex; gap: 12px; align-items: center; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: #fff; max-width: 430px; margin-bottom: 12px; }
+  .printer-icon { width: 42px; height: 42px; border-radius: 11px; background: var(--cream); color: var(--red-dark); display: grid; place-items: center; }
+  .printer-card strong { display: block; font-size: 14px; }
+  .printer-card span { font-size: 12px; color: var(--muted); }
+  .slip-actions { display: flex; gap: 10px; margin-top: 20px; }
+  .slip-paper {
+    width: 340px;
+    justify-self: center;
+    background: #fff;
+    padding: 26px 22px;
+    border-radius: 4px;
+    box-shadow: 0 18px 44px rgba(28,28,30,.18);
+    font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #222;
+    white-space: pre;
+  }
+  .slip-paper .muted { color: #666; }
+
+  /* ---------- content pages ---------- */
+  .content { padding: 24px; overflow-y: auto; height: calc(100% - 70px); }
+  .content-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+  .content-head h2 { margin: 0; font-size: 24px; letter-spacing: -0.4px; }
+  .content-head p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+  .row-actions { display: flex; gap: 8px; }
+  .btn-small { height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+  .btn-small.primary { background: var(--red); border-color: var(--red); color: #fff; }
+  .btn-small:hover { border-color: var(--red); }
+
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
+  .metric { border: 1px solid var(--line); border-radius: 16px; background: #fff; padding: 18px; }
+  .metric .label { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .metric .value { margin-top: 7px; font-size: 26px; font-weight: 900; letter-spacing: -.6px; }
+  .metric .hint { margin-top: 4px; font-size: 12px; color: var(--muted); }
+  .metric.good .value { color: var(--green); }
+  .metric.amber .value { color: var(--amber); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card { border: 1px solid var(--line); border-radius: 16px; background: #fff; padding: 20px; }
+  .card h3 { margin: 0 0 4px; font-size: 17px; }
+  .card .sub { margin: 0 0 16px; color: var(--muted); font-size: 13px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field label { font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+  .input { height: 48px; border: 1px solid var(--line); border-radius: 10px; display: flex; align-items: center; padding: 0 13px; font-size: 16px; font-weight: 700; background: #fff; }
+  .input.money { font-size: 20px; }
+  .hint { margin-top: 6px; font-size: 12px; color: var(--muted); }
+  .field-error { margin-top: 6px; font-size: 12px; color: var(--red-dark); font-weight: 700; }
+  .variance-zero { color: var(--green); }
+
+  .table { width: 100%; border-collapse: collapse; }
+  .table th { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
+  .table td { padding: 14px 8px; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .table tr:last-child td { border-bottom: 0; }
+  .table .mono { font-family: "Cascadia Mono", Consolas, monospace; font-size: 13px; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 9px; border-radius: 999px; font-size: 11px; font-weight: 800; }
+  .pill.completed { background: var(--green-soft); color: var(--green); }
+  .pill.voided { background: #fdecef; color: var(--red-dark); }
+  .pill.offline { background: var(--amber-soft); color: var(--amber); }
+
+  .filters { display: flex; gap: 8px; }
+  .filter { height: 38px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: #fff; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+  .filter.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+  /* ---------- notes ---------- */
+  .notes { max-width: 1280px; margin: 28px auto 0; display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; }
+  .notes .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .notes .card p + p { margin-top: 8px; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .swatch { width: 108px; }
+  .swatch .chip { height: 52px; border-radius: 10px; border: 1px solid rgba(0,0,0,.08); }
+  .swatch span { display: block; margin-top: 5px; font-size: 11px; color: var(--muted); }
+  .type-row { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 9px 0; border-bottom: 1px dashed var(--line); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row span:first-child { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; }
+  .type-row span:last-child { color: var(--ink); }
+  .checklist { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+  .checklist li { margin-bottom: 6px; }
+
+  @media (max-width: 900px) {
+    .page-head h1 { font-size: 26px; }
+    .notes { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <div class="eyebrow">CafePOS · UI mockup</div>
+  <h1>What the counter actually looks like</h1>
+  <p>
+    Static design mockup for a 1280 × 800 Android tablet. These are visual
+    targets for Plan 1 — not the running app. Data is sample data. The sync and
+    printer badges show the eventual product; Plan 1 ships local-only with a
+    slip preview.
+  </p>
+</header>
+
+<nav class="screen-tabs" aria-label="Mockup screens">
+  <button class="tab active" data-target="pos">1 · POS</button>
+  <button class="tab" data-target="payment">2 · Payment</button>
+  <button class="tab" data-target="slip">3 · Slip</button>
+  <button class="tab" data-target="shift">4 · Shift</button>
+  <button class="tab" data-target="history">5 · History</button>
+</nav>
+
+<main>
+
+<!-- ================= POS ================= -->
+<section id="pos" class="screen-panel active">
+  <div class="panel-caption">
+    <strong>Order taking</strong>
+    <span>Category tabs · large tap targets · running cart</span>
+  </div>
+  <div class="frame-wrap">
+    <div class="frame">
+      <div class="app">
+        <aside class="rail" aria-label="Primary">
+          <div class="brand">CP</div>
+          <button class="active" type="button" aria-current="page">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
+            POS
+          </button>
+          <button type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2M12 11v3"/></svg>
+            Shift
+          </button>
+          <button type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+            History
+          </button>
+          <div class="spacer"></div>
+          <button type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 0 0-1.7-1L14.5 3h-4l-.4 2.5a7 7 0 0 0-1.7 1l-2.3-1-2 3.4L6 10.9a7 7 0 0 0 0 2.2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7 7 0 0 0 1.7-1l2.3 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z"/></svg>
+            Settings
+          </button>
+        </aside>
+
+        <div class="workspace">
+          <header class="topbar">
+            <span class="store-name">Cafe POS</span>
+            <span class="badge green"><span class="dot"></span>All synced</span>
+            <span class="badge grey">Shift open · T1</span>
+            <span class="spacer"></span>
+            <span class="badge amber"><span class="dot"></span>XP-58IIH ready</span>
+            <span class="user-chip"><span class="avatar">A</span>Ana · Cashier</span>
+          </header>
+
+          <div class="pos-body">
+            <section class="menu-area" aria-label="Menu">
+              <div class="category-tabs">
+                <button class="active" type="button">Hot Coffee</button>
+                <button type="button">Iced Coffee</button>
+                <button type="button">Non-Coffee</button>
+                <button type="button">Pastries</button>
+                <button type="button">Add-ons</button>
+              </div>
+
+              <div class="menu-grid">
+                <button class="menu-card" type="button">
+                  <span class="cup">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M16 9h2a2.5 2.5 0 0 1 0 5h-2M7 4c0 1 .7 1.4.7 2.3M10 3.5c0 1 .7 1.4.7 2.3"/></svg>
+                  </span>
+                  <span>
+                    <span class="name">Latte</span>
+                    <span class="price">₱120.00</span>
+                    <span class="add">+ Add to order</span>
+                  </span>
+                </button>
+                <button class="menu-card" type="button">
+                  <span class="cup">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M16 9h2a2.5 2.5 0 0 1 0 5h-2M7 4c0 1 .7 1.4.7 2.3M10 3.5c0 1 .7 1.4.7 2.3"/></svg>
+                  </span>
+                  <span>
+                    <span class="name">Americano</span>
+                    <span class="price">₱100.00</span>
+                    <span class="add">+ Add to order</span>
+                  </span>
+                </button>
+                <button class="menu-card" type="button">
+                  <span class="cup">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M16 9h2a2.5 2.5 0 0 1 0 5h-2M7 4c0 1 .7 1.4.7 2.3M10 3.5c0 1 .7 1.4.7 2.3"/></svg>
+                  </span>
+                  <span>
+                    <span class="name">Mocha</span>
+                    <span class="price">₱140.00</span>
+                    <span class="add">+ Add to order</span>
+                  </span>
+                </button>
+                <button class="menu-card" type="button">
+                  <span class="cup">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M16 9h2a2.5 2.5 0 0 1 0 5h-2M7 4c0 1 .7 1.4.7 2.3M10 3.5c0 1 .7 1.4.7 2.3"/></svg>
+                  </span>
+                  <span>
+                    <span class="name">Cappuccino</span>
+                    <span class="price">₱125.00</span>
+                    <span class="add">+ Add to order</span>
+                  </span>
+                </button>
+                <button class="menu-card" type="button">
+                  <span class="cup">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M16 9h2a2.5 2.5 0 0 1 0 5h-2M7 4c0 1 .7 1.4.7 2.3M10 3.5c0 1 .7 1.4.7 2.3"/></svg>
+                  </span>
+                  <span>
+                    <span class="name">Spanish Latte</span>
+                    <span class="price">₱135.00</span>
+                    <span class="add">+ Add to order</span>
+                  </span>
+                </button>
+                <button class="menu-card" type="button">
+                  <span class="cup">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M16 9h2a2.5 2.5 0 0 1 0 5h-2M7 4c0 1 .7 1.4.7 2.3M10 3.5c0 1 .7 1.4.7 2.3"/></svg>
+                  </span>
+                  <span>
+                    <span class="name">Hot Chocolate</span>
+                    <span class="price">₱130.00</span>
+                    <span class="add">+ Add to order</span>
+                  </span>
+                </button>
+              </div>
+              <p class="silent-note">Tip: tap a drink once to add. Use the cart stepper for quantity.</p>
+            </section>
+
+            <aside class="cart" aria-label="Current order">
+              <div class="cart-head">
+                <h2>Current order</h2>
+                <div class="order-type"><span class="active">Dine-in</span><span>Takeout</span></div>
+              </div>
+
+              <div class="cart-lines">
+                <div class="cart-line">
+                  <div class="line-top"><span>2 × Latte</span><span>₱240.00</span></div>
+                  <div class="line-sub">Oat milk · less ice</div>
+                  <div class="qty">
+                    <button type="button" aria-label="Decrease Latte">−</button>
+                    <span class="count">2</span>
+                    <button type="button" aria-label="Increase Latte">+</button>
+                    <button class="remove" type="button" aria-label="Remove item">×</button>
+                  </div>
+                </div>
+                <div class="cart-line">
+                  <div class="line-top"><span>1 × Croissant</span><span>₱85.00</span></div>
+                  <div class="line-sub">Warmed</div>
+                  <div class="qty">
+                    <button type="button" aria-label="Decrease Croissant">−</button>
+                    <span class="count">1</span>
+                    <button type="button" aria-label="Increase Croissant">+</button>
+                    <button class="remove" type="button" aria-label="Remove item">×</button>
+                  </div>
+                </div>
+                <div class="cart-line" style="border-bottom:0;">
+                  <div class="line-top" style="font-size:13px;color:var(--muted);font-weight:700;">
+                    <span>Table</span><span>T5</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cart-summary">
+                <div class="sum-row"><span>Subtotal</span><span>₱325.00</span></div>
+                <div class="sum-row discount"><span>10% discount</span><span>−₱32.50</span></div>
+                <div class="sum-row total"><span>Total</span><span>₱292.50</span></div>
+                <button class="charge" type="button">Charge ₱292.50</button>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PAYMENT ================= -->
+<section id="payment" class="screen-panel">
+  <div class="panel-caption">
+    <strong>Payment</strong>
+    <span>Cash / GCash / Maya · quick amounts · automatic change</span>
+  </div>
+  <div class="frame-wrap">
+    <div class="frame">
+      <div class="payment-stage">
+        <div class="ghost" aria-hidden="true">
+          <div class="g-rail"></div>
+          <div class="g-main">
+            <div class="g-topbar">
+              <span class="g-line" style="width:110px;margin:0;"></span>
+              <span class="g-line" style="width:80px;margin:0;"></span>
+              <span style="flex:1"></span>
+              <span class="g-line" style="width:120px;margin:0;"></span>
+            </div>
+            <div class="g-line" style="width:38%;margin-top:26px;"></div>
+            <div class="g-line" style="width:62%"></div>
+            <div class="g-grid">
+              <div class="g-card"></div><div class="g-card"></div><div class="g-card"></div>
+              <div class="g-card"></div><div class="g-card"></div><div class="g-card"></div>
+            </div>
+          </div>
+          <div class="g-cart">
+            <div class="g-line" style="width:60%;margin-top:8px;"></div>
+            <div class="g-line" style="width:92%;"></div>
+            <div class="g-line" style="width:78%;"></div>
+            <div class="g-line" style="width:86%;"></div>
+            <div class="g-line" style="width:70%;"></div>
+            <div style="flex:1"></div>
+            <div class="g-charge"></div>
+          </div>
+        </div>
+        <div class="scrim"></div>
+
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="pay-title">
+          <div class="modal-head">
+            <div>
+              <h2 id="pay-title">Payment</h2>
+              <p>Order T1-000123 · 3 items</p>
+            </div>
+            <button class="modal-close" type="button" aria-label="Close">×</button>
+          </div>
+          <div class="modal-body">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;">
+              <span style="font-size:13px;color:var(--muted);font-weight:700;">Amount due</span>
+              <span style="font-size:30px;font-weight:900;letter-spacing:-.8px;">₱292.50</span>
+            </div>
+
+            <span class="field-label">Payment method</span>
+            <div class="methods">
+              <button class="method active" type="button">Cash</button>
+              <button class="method" type="button">GCash</button>
+              <button class="method" type="button">Maya</button>
+            </div>
+
+            <span class="field-label">Cash tendered</span>
+            <div class="amount-box"><span>₱</span>500.00</div>
+            <div class="quick">
+              <button type="button">Exact ₱292.50</button>
+              <button type="button">₱500</button>
+              <button type="button">₱1,000</button>
+            </div>
+
+            <div class="change-box">
+              <span style="font-weight:800;">Change due</span>
+              <strong>₱207.50</strong>
+            </div>
+
+            <div class="modal-actions">
+              <button class="btn-secondary" type="button">Cancel</button>
+              <button class="btn-primary" type="button">Confirm payment</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SLIP ================= -->
+<section id="slip" class="screen-panel">
+  <div class="panel-caption">
+    <strong>Transaction slip</strong>
+    <span>58 mm · 32 characters per line · internal, non-BIR</span>
+  </div>
+  <div class="frame-wrap">
+    <div class="frame">
+      <div class="slip-stage">
+        <div class="slip-info">
+          <div class="badge green" style="margin-bottom:14px;"><span class="dot"></span>Sale completed · ₱292.50</div>
+          <h2>Slip is ready.</h2>
+          <p>
+            This is the exact text that will be sent to the XP-58IIH over
+            Bluetooth Classic SPP. Reprints are marked so the paper trail stays
+            honest.
+          </p>
+
+          <div class="printer-card">
+            <div class="printer-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V4h12v5"/><path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v6H6z"/></svg>
+            </div>
+            <div>
+              <strong>Xprinter XP-58IIH</strong>
+              <span>Bluetooth Classic SPP · 58 mm · paper OK</span>
+            </div>
+          </div>
+
+          <div class="slip-actions">
+            <button class="btn-primary" style="flex:1;width:auto;padding:0 22px;" type="button">Print slip</button>
+            <button class="btn-secondary" style="flex:0 0 130px;" type="button">Reprint</button>
+          </div>
+        </div>
+
+        <div class="slip-paper" aria-label="Sample transaction slip">
+<span class="muted">        Cafe POS</span>
+<span class="muted">     123 Brew Street</span>
+--------------------------------
+Order: T1-000123
+Cashier: Ana
+2026-11-08 09:15
+--------------------------------
+2x Latte                 240.00
+  Oat milk, less ice
+1x Croissant              85.00
+  Warmed
+--------------------------------
+Subtotal                 325.00
+Discount                 -32.50
+TOTAL                    292.50
+Cash                     500.00
+Change                   207.50
+--------------------------------
+<span class="muted">        Thank you!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHIFT ================= -->
+<section id="shift" class="screen-panel">
+  <div class="panel-caption">
+    <strong>Shift and cash drawer</strong>
+    <span>Opening float · cash in/out · expected vs counted · variance · scroll for movements</span>
+  </div>
+  <div class="frame-wrap">
+    <div class="frame">
+      <div class="app">
+        <aside class="rail" aria-label="Primary">
+          <div class="brand">CP</div>
+          <button type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
+            POS
+          </button>
+          <button class="active" type="button" aria-current="page">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2M12 11v3"/></svg>
+            Shift
+          </button>
+          <button type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+            History
+          </button>
+          <div class="spacer"></div>
+          <button type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 0 0-1.7-1L14.5 3h-4l-.4 2.5a7 7 0 0 0-1.7 1l-2.3-1-2 3.4L6 10.9a7 7 0 0 0 0 2.2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7 7 0 0 0 1.7-1l2.3 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z"/></svg>
+            Settings
+          </button>
+        </aside>
+
+        <div class="workspace">
+          <header class="topbar">
+            <span class="store-name">Cafe POS</span>
+            <span class="badge green"><span class="dot"></span>All synced</span>
+            <span class="badge grey">Shift open · T1</span>
+            <span class="spacer"></span>
+            <span class="user-chip"><span class="avatar">A</span>Ana · Cashier</span>
+          </header>
+
+          <div class="content">
+            <div class="content-head">
+              <div>
+                <h2>Shift · T1</h2>
+                <p>Opened 08:02 by Ana · Drawer counted at close</p>
+              </div>
+              <div class="row-actions">
+                <button class="btn-small" type="button">Cash in</button>
+                <button class="btn-small" type="button">Cash out</button>
+                <button class="btn-small primary" type="button">Close shift</button>
+              </div>
+            </div>
+
+            <div class="metrics">
+              <div class="metric">
+                <div class="label">Opening float</div>
+                <div class="value">₱1,000.00</div>
+                <div class="hint">Set at 08:02</div>
+              </div>
+              <div class="metric">
+                <div class="label">Cash sales</div>
+                <div class="value">₱292.50</div>
+                <div class="hint">1 cash order</div>
+              </div>
+              <div class="metric">
+                <div class="label">Expected cash</div>
+                <div class="value">₱1,292.50</div>
+                <div class="hint">Float + cash sales</div>
+              </div>
+              <div class="metric good">
+                <div class="label">Variance</div>
+                <div class="value">₱0.00</div>
+                <div class="hint">Counted matches expected</div>
+              </div>
+            </div>
+
+            <div class="two-col">
+              <div class="card">
+                <h3>Close shift</h3>
+                <p class="sub">Enter the counted cash. The variance is computed automatically.</p>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="counted">Counted cash</label>
+                    <div class="input money" id="counted">₱1,292.50</div>
+                  </div>
+                  <div class="form-field">
+                    <label for="expected">Expected</label>
+                    <div class="input money" id="expected" style="color:var(--muted);">₱1,292.50</div>
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label for="note">Note (optional)</label>
+                  <div class="input" id="note" style="color:var(--muted);font-weight:500;">No variance</div>
+                </div>
+                <p class="hint" style="margin-top:10px;">Variance: <strong class="variance-zero">₱0.00</strong></p>
+                <div style="margin-top:16px;">
+                  <button class="btn-small primary" style="width:100%;height:48px;" type="button">Close shift and print summary</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3>Cash movement</h3>
+                <p class="sub">Log cash in or out so the expected drawer stays accurate.</p>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="amount">Amount</label>
+                    <div class="input money" id="amount">₱500.00</div>
+                  </div>
+                  <div class="form-field">
+                    <label for="reason">Reason</label>
+                    <div class="input" id="reason" style="font-weight:600;">Change fund</div>
+                  </div>
+                </div>
+                <div style="display:flex;gap:10px;margin-top:14px;">
+                  <button class="btn-small" style="flex:1;height:48px;" type="button">Cash in +</button>
+                  <button class="btn-small" style="flex:1;height:48px;" type="button">Cash out −</button>
+                </div>
+                <p class="hint">Cash in increases expected cash. Cash out decreases it.</p>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top:16px;">
+              <h3>Today’s movements</h3>
+              <table class="table">
+                <thead><tr><th>Time</th><th>Type</th><th>Reason</th><th>Staff</th><th style="text-align:right;">Amount</th></tr></thead>
+                <tbody>
+                  <tr><td>08:02</td><td>Opening float</td><td>Start of shift</td><td>Ana</td><td style="text-align:right;" class="mono">₱1,000.00</td></tr>
+                  <tr><td>10:14</td><td>Cash in</td><td>Change fund</td><td>Ana</td><td style="text-align:right;" class="mono">₱500.00</td></tr>
+                  <tr><td>13:40</td><td>Cash out</td><td>Milk run</td><td>Ana</td><td style="text-align:right;" class="mono">−₱200.00</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HISTORY ================= -->
+<section id="history" class="screen-panel">
+  <div class="panel-caption">
+    <strong>Order history</strong>
+    <span>Search · status · reprint · offline-safe</span>
+  </div>
+  <div class="frame-wrap">
+    <div class="frame">
+      <div class="app">
+        <aside class="rail" aria-label="Primary">
+          <div class="brand">CP</div>
+          <button type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
+            POS
+          </button>
+          <button type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2M12 11v3"/></svg>
+            Shift
+          </button>
+          <button class="active" type="button" aria-current="page">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+            History
+          </button>
+          <div class="spacer"></div>
+          <button type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 0 0-1.7-1L14.5 3h-4l-.4 2.5a7 7 0 0 0-1.7 1l-2.3-1-2 3.4L6 10.9a7 7 0 0 0 0 2.2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7 7 0 0 0 1.7-1l2.3 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z"/></svg>
+            Settings
+          </button>
+        </aside>
+
+        <div class="workspace">
+          <header class="topbar">
+            <span class="store-name">Cafe POS</span>
+            <span class="badge green"><span class="dot"></span>All synced</span>
+            <span class="badge grey">Shift open · T1</span>
+            <span class="spacer"></span>
+            <span class="user-chip"><span class="avatar">A</span>Ana · Cashier</span>
+          </header>
+
+          <div class="content">
+            <div class="content-head">
+              <div>
+                <h2>Orders</h2>
+                <p>Every completed sale stays on the device until it is synced.</p>
+              </div>
+              <div class="filters">
+                <button class="filter active" type="button">Today</button>
+                <button class="filter" type="button">This week</button>
+                <button class="filter" type="button">All</button>
+              </div>
+            </div>
+
+            <div class="card" style="padding:8px 14px 4px;">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Time</th>
+                    <th>Items</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Total</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="mono">T1-000123</td>
+                    <td>09:15</td>
+                    <td>2 Latte, 1 Croissant</td>
+                    <td>Cash</td>
+                    <td><span class="pill completed"><span class="dot"></span>Completed</span></td>
+                    <td style="text-align:right;" class="mono">₱292.50</td>
+                    <td style="text-align:right;"><button class="btn-small" type="button">Reprint</button></td>
+                  </tr>
+                  <tr>
+                    <td class="mono">T1-000122</td>
+                    <td>09:02</td>
+                    <td>1 Americano</td>
+                    <td>GCash</td>
+                    <td><span class="pill completed"><span class="dot"></span>Completed</span></td>
+                    <td style="text-align:right;" class="mono">₱100.00</td>
+                    <td style="text-align:right;"><button class="btn-small" type="button">Reprint</button></td>
+                  </tr>
+                  <tr>
+                    <td class="mono">T1-000121</td>
+                    <td>08:48</td>
+                    <td>1 Croissant</td>
+                    <td>—</td>
+                    <td><span class="pill voided"><span class="dot"></span>Voided</span></td>
+                    <td style="text-align:right;" class="mono">₱85.00</td>
+                    <td style="text-align:right;"><button class="btn-small" type="button">View</button></td>
+                  </tr>
+                  <tr>
+                    <td class="mono">T1-000120</td>
+                    <td>08:31</td>
+                    <td>1 Iced Latte</td>
+                    <td>Maya</td>
+                    <td><span class="pill completed"><span class="dot"></span>Completed</span></td>
+                    <td style="text-align:right;" class="mono">₱130.00</td>
+                    <td style="text-align:right;"><button class="btn-small" type="button">Reprint</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="hint" style="padding:10px 8px 12px;">4 orders · ₱522.50 total · 0 pending sync</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= DESIGN NOTES ================= -->
+<section class="notes">
+  <div class="card">
+    <h3>Design notes</h3>
+    <p>
+      Built around the counter, not a dashboard. The menu is the largest target;
+      the cart is always visible; the charge button is the only red primary
+      action on the screen.
+    </p>
+    <p>
+      Body text is 14–16px, menu cards are 126px tall, and every tap target is
+      at least 44×44px. Status never relies on color alone — each badge has a dot
+      and a label.
+    </p>
+    <p>
+      The tab bar is for this mockup only. In the real app, navigation is the
+      left rail with POS, Shift, and History.
+    </p>
+    <div class="swatches" aria-label="Color palette">
+      <div class="swatch"><div class="chip" style="background:#c8102e"></div><span>Primary #C8102E</span></div>
+      <div class="swatch"><div class="chip" style="background:#8e0b20"></div><span>Dark #8E0B20</span></div>
+      <div class="swatch"><div class="chip" style="background:#fff8e7"></div><span>Cream #FFF8E7</span></div>
+      <div class="swatch"><div class="chip" style="background:#1c1c1e"></div><span>Ink #1C1C1E</span></div>
+      <div class="swatch"><div class="chip" style="background:#1f6f43"></div><span>Success #1F6F43</span></div>
+      <div class="swatch"><div class="chip" style="background:#8a6d1f"></div><span>Warning #8A6D1F</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Type and touch</h3>
+    <div class="type-row"><span>Page title</span><span style="font-size:30px;font-weight:900;">30 / 900</span></div>
+    <div class="type-row"><span>Section title</span><span style="font-size:22px;font-weight:800;">22 / 800</span></div>
+    <div class="type-row"><span>Body</span><span style="font-size:15px;">15 / 400</span></div>
+    <div class="type-row"><span>Label</span><span style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;">12 / 800 caps</span></div>
+    <div class="type-row"><span>Slip</span><span style="font-family:Consolas,monospace;font-size:12px;">12 mono · 32 cols</span></div>
+    <ul class="checklist">
+      <li>Touch targets: 44px minimum, 58px for Charge.</li>
+      <li>Contrast: ink on white, white on red, green on green-soft.</li>
+      <li>No hover-only actions; every action is a visible button.</li>
+      <li>Modal traps focus and has a visible close control.</li>
+    </ul>
+  </div>
+</section>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll('.tab'));
+  const panels = Array.from(document.querySelectorAll('.screen-panel'));
+
+  function show(target) {
+    tabs.forEach((tab) => {
+      const active = tab.dataset.target === target;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+    });
+    panels.forEach((panel) => {
+      panel.classList.toggle('active', panel.id === target);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => show(tab.dataset.target));
+  });
+
+  const requested = new URLSearchParams(window.location.search).get('screen');
+  if (requested && document.getElementById(requested)) {
+    show(requested);
+  }
+</script>
+
+</body>
+</html>
