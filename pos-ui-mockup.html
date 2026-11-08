@@ -6,6 +6,14 @@
 <title>CafePOS — UI Mockup</title>
 <style>
   :root {
+    --danger: #b3261e;
+    --danger-soft: #fbeceb;
+    --amber: #8a6d1f;
+    --amber-soft: #fdf8ea;
+  }
+
+  :root,
+  [data-theme="forest"] {
     --green: #1f4d36;
     --green-dark: #143525;
     --green-mid: #2f6b4a;
@@ -17,10 +25,62 @@
     --soft: #fbf8f1;
     --white: #fffdf9;
     --bg: #f1ece2;
-    --danger: #b3261e;
-    --danger-soft: #fbeceb;
-    --amber: #8a6d1f;
-    --amber-soft: #fdf8ea;
+  }
+
+  [data-theme="espresso"] {
+    --green: #4a2e1f;
+    --green-dark: #332014;
+    --green-mid: #6b4630;
+    --green-soft: #f0e7dd;
+    --ink: #2a211b;
+    --muted: #74675c;
+    --line: #e3d8c9;
+    --cream: #f5efe6;
+    --soft: #fbf6ee;
+    --white: #fffaf3;
+    --bg: #f5efe6;
+  }
+
+  [data-theme="ocean"] {
+    --green: #1f3a5f;
+    --green-dark: #142844;
+    --green-mid: #34557d;
+    --green-soft: #e4ebf3;
+    --ink: #1b2735;
+    --muted: #63707d;
+    --line: #d8e0e8;
+    --cream: #f2f5f8;
+    --soft: #f7fafc;
+    --white: #fbfdff;
+    --bg: #f2f5f8;
+  }
+
+  [data-theme="plum"] {
+    --green: #4a2a5a;
+    --green-dark: #341c40;
+    --green-mid: #6a447a;
+    --green-soft: #eee4f2;
+    --ink: #2a1f2e;
+    --muted: #74667a;
+    --line: #e4d7e2;
+    --cream: #f6f0f5;
+    --soft: #faf5f9;
+    --white: #fffbfe;
+    --bg: #f6f0f5;
+  }
+
+  [data-theme="slate"] {
+    --green: #2f3a3a;
+    --green-dark: #1f2828;
+    --green-mid: #4a5656;
+    --green-soft: #e8eded;
+    --ink: #232b2b;
+    --muted: #6f7675;
+    --line: #e2ddd4;
+    --cream: #f4f1ec;
+    --soft: #f8f6f2;
+    --white: #fffdf9;
+    --bg: #f4f1ec;
   }
 
   * { box-sizing: border-box; }
@@ -52,12 +112,12 @@
     position: sticky; top: 0; z-index: 20;
     display: flex; flex-wrap: wrap; gap: 8px;
     max-width: 1320px; margin: 0 auto; padding: 16px 24px;
-    background: rgba(241, 236, 226, 0.94);
+    background: var(--bg);
     backdrop-filter: blur(10px);
   }
   .tab {
     height: 40px; padding: 0 16px;
-    border: 1px solid #d8d0c0; border-radius: 999px;
+    border: 1px solid var(--line); border-radius: 999px;
     background: var(--white); color: var(--ink);
     font: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
   }
@@ -335,6 +395,25 @@
   .filter { height: 38px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
   .filter.active { background: var(--green); border-color: var(--green); color: #fff; }
 
+  /* ---------- appearance ---------- */
+  .theme-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .theme-card {
+    border: 1px solid var(--line); border-radius: 14px; background: var(--white);
+    padding: 12px; text-align: left; font: inherit; cursor: pointer;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .theme-card:hover { border-color: var(--green); }
+  .theme-card.active { border-color: var(--green); box-shadow: 0 0 0 1px var(--green) inset; }
+  .theme-swatches { display: flex; gap: 6px; }
+  .theme-swatch { flex: 1; height: 42px; border-radius: 8px; border: 1px solid rgba(0,0,0,.06); }
+  .theme-name { font-size: 14px; font-weight: 700; }
+  .theme-state { font-size: 12px; color: var(--muted); }
+  .preview-card { display: flex; flex-direction: column; gap: 12px; }
+  .preview-head { background: var(--green-dark); color: #fff; border-radius: 12px; padding: 12px 14px; font-weight: 700; }
+  .preview-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  .preview-total { display: flex; justify-content: space-between; font-size: 20px; font-weight: 800; color: var(--ink); }
+  .preview-charge { height: 44px; border: 0; border-radius: 10px; background: var(--green); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+
   /* ---------- notes ---------- */
   .notes { max-width: 1280px; margin: 28px auto 0; display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; }
   .notes .card p { margin: 0; color: var(--muted); font-size: 14px; }
@@ -372,7 +451,8 @@
     <a href="mockup-payment.png">Payment</a> ·
     <a href="mockup-slip.png">Slip</a> ·
     <a href="mockup-shift.png">Shift</a> ·
-    <a href="mockup-history.png">History</a>
+    <a href="mockup-history.png">History</a> ·
+    <a href="mockup-settings.png">Settings</a>
   </p>
 </header>
 
@@ -382,6 +462,7 @@
   <button class="tab" data-target="slip">3 · Slip</button>
   <button class="tab" data-target="shift">4 · Shift</button>
   <button class="tab" data-target="history">5 · History</button>
+  <button class="tab" data-target="settings">6 · Settings</button>
 </nav>
 
 <main>
@@ -961,6 +1042,144 @@ Change                    90.50
   </div>
 </section>
 
+<!-- ================= SETTINGS ================= -->
+<section id="settings" class="screen-panel">
+  <div class="panel-caption">
+    <strong>Settings</strong>
+    <span>Owner-only appearance · five theme presets · live preview</span>
+  </div>
+  <div class="frame-wrap">
+    <div class="frame">
+      <div class="app">
+        <aside class="rail" aria-label="Primary">
+          <div class="brand">
+            <div class="brand-mark">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 8h11v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z"/><path d="M16 9h2a2.5 2.5 0 0 1 0 5h-2M7 4c0 1 .7 1.4.7 2.3M10 3.5c0 1 .7 1.4.7 2.3"/></svg>
+            </div>
+            <div class="brand-name">Cafe<br>POS</div>
+          </div>
+          <nav class="rail-nav">
+            <button type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
+              Sales
+            </button>
+            <button type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h14v16l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>
+              Orders
+            </button>
+            <button type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2M12 11v3"/></svg>
+              Shift
+            </button>
+            <button class="active" type="button" aria-current="page">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.5-2-3.4-2.3 1a7 7 0 0 0-1.7-1L14.5 3h-4l-.4 2.5a7 7 0 0 0-1.7 1l-2.3-1-2 3.4L6 10.9a7 7 0 0 0 0 2.2l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7 7 0 0 0 1.7-1l2.3 1 2-3.4-2-1.5a7 7 0 0 0 .1-1z"/></svg>
+              Settings
+            </button>
+          </nav>
+          <div class="rail-user">
+            <div class="avatar">A</div>
+            <div><strong>Ana</strong>Owner</div>
+            <button class="logout" type="button" aria-label="Sign out">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H5v14h4M14 8l4 4-4 4M9 12h9"/></svg>
+            </button>
+          </div>
+        </aside>
+
+        <div class="workspace">
+          <header class="topbar">
+            <div class="search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input aria-label="Search settings" placeholder="Search settings..." />
+            </div>
+            <div class="top-meta">
+              <span class="badge grey">Shift open · T1</span>
+              <span>Nov 8, 2026 · 09:15 AM</span>
+              <span class="badge green"><span class="dot"></span>All saved</span>
+            </div>
+          </header>
+
+          <div class="content">
+            <div class="content-head">
+              <div>
+                <h2>Settings</h2>
+                <p>Owner-only shop preferences.</p>
+              </div>
+              <span class="badge grey">Owner</span>
+            </div>
+
+            <div class="card">
+              <h3>Appearance</h3>
+              <p class="sub">Choose a color theme for this shop. Cashiers cannot change it. Thermal slips stay monochrome.</p>
+
+              <div class="theme-grid">
+                <button class="theme-card active" type="button" data-theme-choice="forest" aria-pressed="true">
+                  <span class="theme-swatches"><span class="theme-swatch" style="background:#1f4d36"></span><span class="theme-swatch" style="background:#f7f2e8"></span></span>
+                  <span class="theme-name">Forest</span>
+                  <span class="theme-state">Active</span>
+                </button>
+                <button class="theme-card" type="button" data-theme-choice="espresso" aria-pressed="false">
+                  <span class="theme-swatches"><span class="theme-swatch" style="background:#4a2e1f"></span><span class="theme-swatch" style="background:#f5efe6"></span></span>
+                  <span class="theme-name">Espresso</span>
+                  <span class="theme-state">Tap to preview</span>
+                </button>
+                <button class="theme-card" type="button" data-theme-choice="ocean" aria-pressed="false">
+                  <span class="theme-swatches"><span class="theme-swatch" style="background:#1f3a5f"></span><span class="theme-swatch" style="background:#f2f5f8"></span></span>
+                  <span class="theme-name">Ocean</span>
+                  <span class="theme-state">Tap to preview</span>
+                </button>
+                <button class="theme-card" type="button" data-theme-choice="plum" aria-pressed="false">
+                  <span class="theme-swatches"><span class="theme-swatch" style="background:#4a2a5a"></span><span class="theme-swatch" style="background:#f6f0f5"></span></span>
+                  <span class="theme-name">Plum</span>
+                  <span class="theme-state">Tap to preview</span>
+                </button>
+                <button class="theme-card" type="button" data-theme-choice="slate" aria-pressed="false">
+                  <span class="theme-swatches"><span class="theme-swatch" style="background:#2f3a3a"></span><span class="theme-swatch" style="background:#f4f1ec"></span></span>
+                  <span class="theme-name">Slate</span>
+                  <span class="theme-state">Tap to preview</span>
+                </button>
+              </div>
+
+              <p class="hint">Danger, success, and warning colors stay fixed so status meaning never changes.</p>
+            </div>
+
+            <div class="two-col" style="margin-top:16px;">
+              <div class="card">
+                <h3>Live preview</h3>
+                <p class="sub">This card updates as you pick a theme.</p>
+                <div class="preview-card">
+                  <div class="preview-head">Current Order</div>
+                  <div class="preview-row"><span>2 × Latte</span><span>₱240.00</span></div>
+                  <div class="preview-row"><span>1 × Croissant</span><span>₱85.00</span></div>
+                  <div class="preview-total"><span>Total</span><span>₱325.00</span></div>
+                  <button class="preview-charge" type="button">Charge ₱325.00</button>
+                </div>
+              </div>
+
+              <div class="card">
+                <h3>Shop preferences</h3>
+                <p class="sub">Static placeholders for the next settings pass.</p>
+                <div class="form-field" style="margin-bottom:12px;">
+                  <label>Receipt header</label>
+                  <div class="input" style="font-weight:500;">Cafe POS</div>
+                </div>
+                <div class="form-field" style="margin-bottom:12px;">
+                  <label>Receipt footer</label>
+                  <div class="input" style="font-weight:500;">Thank you!</div>
+                </div>
+                <div class="form-field">
+                  <label>Table numbers</label>
+                  <div class="input" style="font-weight:500;color:var(--muted);">Off</div>
+                </div>
+                <p class="hint">Only the owner can open this page. Theme changes are saved in the shop's config version.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <!-- ================= DESIGN NOTES ================= -->
@@ -980,6 +1199,11 @@ Change                    90.50
     <p>
       The VAT line is configurable. This sample shows it on (12%, inclusive);
       the design spec ships with tax disabled by default.
+    </p>
+    <p>
+      Five owner-selectable themes — Forest, Espresso, Ocean, Plum, and Slate —
+      change only the brand surface. Danger, success, and warning colors stay
+      fixed. Open the Settings tab and tap a theme to preview it live.
     </p>
     <div class="swatches" aria-label="Color palette">
       <div class="swatch"><div class="chip" style="background:#1f4d36"></div><span>Green #1F4D36</span></div>
@@ -1003,6 +1227,7 @@ Change                    90.50
       <li>Touch targets: 44px minimum, 60px for Charge.</li>
       <li>Search input is 48px tall; category chips are 42px.</li>
       <li>Status never relies on color alone: dot + label.</li>
+      <li>Theme changes are owner-only and stored in the config snapshot.</li>
       <li>Modal has a visible close control and labeled inputs.</li>
     </ul>
   </div>
@@ -1028,7 +1253,28 @@ Change                    90.50
     tab.addEventListener('click', () => show(tab.dataset.target));
   });
 
-  const requested = new URLSearchParams(window.location.search).get('screen');
+  const themeCards = Array.from(document.querySelectorAll('[data-theme-choice]'));
+
+  function setTheme(id) {
+    document.documentElement.dataset.theme = id;
+    themeCards.forEach((card) => {
+      const active = card.dataset.themeChoice === id;
+      card.classList.toggle('active', active);
+      card.setAttribute('aria-pressed', String(active));
+      const state = card.querySelector('.theme-state');
+      if (state) state.textContent = active ? 'Active' : 'Tap to preview';
+    });
+  }
+
+  themeCards.forEach((card) => {
+    card.addEventListener('click', () => setTheme(card.dataset.themeChoice));
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const requestedTheme = params.get('theme');
+  if (requestedTheme) setTheme(requestedTheme);
+
+  const requested = params.get('screen');
   if (requested && document.getElementById(requested)) {
     show(requested);
   }
